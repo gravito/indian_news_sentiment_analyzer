@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import scipy
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import pandas as pd
@@ -12,11 +11,12 @@ from nltk.tokenize import word_tokenize, RegexpTokenizer
 tokenizer = RegexpTokenizer(r'\w+') #for tokenizing
 
 headlines = []
+
 # For Hindu
 r_hindu = requests.get("https://www.thehindu.com/")
 soup_hindu = BeautifulSoup(r_hindu.content, 'html.parser')
 hindu = soup_hindu.find_all("h2")
-for item in hindu[:5]: # to read it better, till 5 because news headlines till 5
+for item in hindu[:5]: 
     headlines.append(item.text.strip())
 
 # For TOI
@@ -80,7 +80,6 @@ def process_text(headlines):
         toks = tokenizer.tokenize(line)
         toks = [t.lower() for t in toks if t.lower() not in stop_words]
         tokens.extend(toks)
-    
     return tokens
 
 #positive words
@@ -98,6 +97,6 @@ neg_lines = list(df2[df2.label == -1].headline)
 neg_tokens = process_text(neg_lines)
 neg_freq = nltk.FreqDist(neg_tokens)
 
-print("Negative words")
+print("Negative words:")
 print(neg_freq.most_common())
 
