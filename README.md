@@ -32,6 +32,8 @@ In future versions, will use a CSV file, and maybe use RSS feed to get even more
 ### OUTPUT FORMAT:
 It will first generate a plot based on frequency of positive or negative words encountered. It will then generate a CSV file, which keeps track of the headlines and the associated label. Furthermore, it will print most frequently encountered positive and negative words.
 
+![Output](/sample.PNG "Screenshot")
+
 ### ASSUMPTIONS:
 ```
 df.loc[df['compound'] > 0.2, 'label'] = 1
